@@ -1,1 +1,157 @@
-<!doctype html> <html lang='es'> <head>   <meta charset='utf-8'>   <meta name='viewport' content='width=device-width,initial-scale=1'>   <title>Munduk 2026 - mapa decision</title>   <link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'>   <style>     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f3ed;color:#263027}     header{padding:22px 24px;background:#e8f0df;border-bottom:1px solid #ddd3c2}     h1{margin:0 0 6px;font-size:30px}p{margin:0;color:#66705f;line-height:1.4}     .layout{display:grid;grid-template-columns:360px 1fr;min-height:calc(100vh - 92px)}     aside{padding:16px;background:#fffaf2;border-right:1px solid #ddd3c2;overflow:auto}     #map{min-height:560px}     main{display:grid;grid-template-rows:56vh auto}     .content{padding:16px;display:grid;gap:16px}     .card{background:#fffaf2;border:1px solid #ddd3c2;border-radius:8px;padding:14px}     .stay{border:1px solid #ddd3c2;border-radius:8px;background:#fff;padding:10px;margin:10px 0}     .pill{display:inline-block;padding:3px 7px;border-radius:999px;background:#edf4e7;color:#2f6f48;font-size:12px;font-weight:700;margin:6px 4px 4px 0}     table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px;border-bottom:1px solid #ddd3c2;text-align:left;vertical-align:top}th{background:#eee6d7}     a{color:#2f6e91;text-decoration:none}a:hover{text-decoration:underline}     .note{background:#fff7e8;border:1px solid #ead1a5;border-radius:8px;padding:10px;color:#68502d}     .popup a{display:inline-block;margin:6px 6px 0 0}     @media(max-width:900px){.layout{grid-template-columns:1fr}main{grid-template-rows:60vh auto}aside{border-right:0;border-bottom:1px solid #ddd3c2}}   </style> </head> <body>   <header>     <h1>Munduk 17-20 julio - mapa de decision</h1>     <p>Comparativa practica de alojamientos, pueblo/cena, cascadas y lagos sin depender de moto.</p>   </header>   <div class='layout'>     <aside>       <div class='card'>         <h2>Ranking rapido</h2>         <p><strong>Made Oka</strong> gana por logistica a pie. <strong>Puri Lumbung</strong> seria upgrade practico si aceptais no cancelacion. <strong>Bali Rahayu</strong> gana en comodidad/vistas con taxis cortos. <strong>Moondock</strong> es experiencia bonita pero hay que confirmar acceso de equipaje. <strong>Kayukopi</strong> es el menos practico sin moto.</p>       </div>       <div id='stays'></div>     </aside>     <main>       <div id='map'></div>       <div class='content'>         <section class='card'>           <h2>Enlaces clave desde cada reserva</h2>           <table><thead><tr><th>Base</th><th>Pueblo y cena</th><th>Cascadas y lagos</th></tr></thead><tbody id='links'></tbody></table>         </section>         <section class='card'>           <h2>Puntos utiles</h2>           <table><thead><tr><th>Pin</th><th>Punto</th><th>Uso</th></tr></thead><tbody id='pois'></tbody></table>         </section>         <section class='card'>           <div class='note'>Para el dia 17: cero excursion, check-in, ducha y cena facil. Para el 18: loop de cascadas local. Para el 19: Tamblingan, Buyan, Twin Lake View y, si hay energia, Banyumala o Banyu Wana Amertha con driver.</div>         </section>       </div>     </main>   </div>   <script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>   <script>     const hotels=[       {n:'Made Oka Homestay and Warung',p:'82 EUR / 3 noches',s:'Mejor base a pie',c:[-8.2656174,115.0580915],c1:'#2f7d58',fit:'9/10',note:'Pueblo, cena y rutas locales muy comodos.'},       {n:'Puri Lumbung Cottages',p:'A reservar',s:'Upgrade practico',c:[-8.264695,115.060220],c1:'#7a8f3b',fit:'8.5/10',note:'Muy buena salida a pie, restaurante y spa. Ojo no cancelacion.'},       {n:'Bali Rahayu Homestay',p:'Reserva activa',s:'Comfort-value',c:[-8.264154,115.041178],c1:'#548c91',fit:'8/10',note:'Vistas, piscina y restaurante. Mejor con taxis cortos.'},       {n:'Aditya Homestay',p:'52 EUR / 3 noches',s:'Ahorro',c:[-8.267294,115.054804],c1:'#4d8d68',fit:'8/10',note:'Barato y razonablemente centrado.'},       {n:'Moondock Luxury Camp',p:'257 EUR / 3 noches',s:'Glamping',c:[-8.272995,115.062903],c1:'#a56a23',fit:'7/10',note:'Pin corregido. Confirmar acceso de equipaje desde carretera.'},       {n:'Kayukopi',p:'213 EUR / 3 noches',s:'Mas aislado',c:[-8.243695,115.071853],c1:'#a33d32',fit:'5.5/10',note:'No encaja tan bien sin moto.'}     ];     const points=[       {id:'V',n:'Munduk Village',c:[-8.26427,115.05949],q:'Munduk Village Buleleng Bali',use:'Referencia de pueblo, tiendas y warungs.'},       {id:'D1',n:'Jl Pura Puseh dinner cluster',c:[-8.26635,115.05675],q:'Warung Classic Munduk Jl Pura Puseh',use:'Cena y atardecer cerca del eje de hoteles.'},       {id:'D2',n:'Warung Heaven',c:[-8.26690,115.05575],q:'Warung Heaven Munduk Jl Pura Puseh',use:'Cena sencilla cerca de Munduk village.'},       {id:'S1',n:'Parking waterfall track / Melanting Cottages',c:[-8.2614236,115.0658846],q:'Parking waterfall track Munduk',use:'Inicio util para el loop local de cascadas.'},       {id:'P1',n:'Red Coral / Munduk Waterfall parking',c:[-8.25870,115.07020],q:'Munduk Waterfall Parking Red Coral Munduk',use:'Entrada corta si vais en coche o quereis acortar.'},       {id:'P2',n:'Golden Valley road entrance',c:[-8.255667,115.074306],q:'Golden Valley Waterfall Munduk',use:'Extremo este del trek local.'},       {id:'L1',n:'Lake Tamblingan west access',c:[-8.264081,115.091111],q:'Pura Ulun Danu Tamblingan Munduk',use:'Acceso lago, templo, taquilla y canoa.'},       {id:'L2',n:'Twin Lake View / Wanagiri',c:[-8.24880,115.10600],q:'Twin Lake View Wanagiri Bali',use:'Mirador Buyan y Tamblingan.'},       {id:'P3',n:'Banyumala car parking',c:[-8.217556,115.103806],q:'Banyumala Twin Waterfalls parking',use:'Parking/start con driver.'},       {id:'P4',n:'Banyu Wana Amertha entrance',c:[-8.212829,115.122227],q:'Banyu Wana Amertha Waterfall entrance',use:'Entrada y taquilla aproximada.'}     ];     const map=L.map('map').setView([-8.2602,115.068],14);     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'OpenStreetMap'}).addTo(map);     const g=s=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(s);     const d=(a,b,m)=>'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(a.join(','))+'&destination='+encodeURIComponent(b.join(','))+'&travelmode='+m;     const icon=(color,label)=>L.divIcon({className:'',html:'<div style=background:'+color+';color:white;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:800;border:2px solid white;box-shadow:0 2px 8px #0005>'+label+'</div>',iconSize:[28,28],iconAnchor:[14,14]});     hotels.forEach((h,i)=>L.marker(h.c,{icon:icon(h.c1,String(i+1))}).addTo(map).bindPopup('<div class=popup><strong>'+h.n+'</strong><br>'+h.p+' - '+h.fit+'<br>'+h.note+'<br><a target=_blank href='+g(h.n)+'>Google Maps</a><a target=_blank href='+d(h.c,points[0].c,'walking')+'>Pueblo</a><a target=_blank href='+d(h.c,points[3].c,'walking')+'>Cascadas S1</a></div>'));     points.forEach(p=>L.marker(p.c,{icon:icon('#2f6e91',p.id)}).addTo(map).bindPopup('<strong>'+p.n+'</strong><br>'+p.use+'<br><a target=_blank href='+g(p.q)+'>Abrir punto</a>'));     L.polyline([[-8.264695,115.060220],[-8.2614236,115.0658846],[-8.2604,115.0672],[-8.2579,115.0695],[-8.255667,115.074306]],{color:'#2f6e91',weight:4,dashArray:'8 8'}).addTo(map);     map.fitBounds(L.latLngBounds([...hotels.map(h=>h.c),...points.map(p=>p.c)]).pad(.15));     document.getElementById('stays').innerHTML=hotels.map((h,i)=>'<div class=stay><strong>'+(i+1)+'. '+h.n+'</strong><br><span class=pill>'+h.p+'</span><span class=pill>'+h.fit+'</span><p>'+h.note+'</p></div>').join('');     document.getElementById('links').innerHTML=hotels.map(h=>'<tr><td><strong>'+h.n+'</strong><br>'+h.s+'</td><td><a target=_blank href='+d(h.c,points[0].c,'walking')+'>Munduk Village andando</a><br><a target=_blank href='+d(h.c,points[1].c,'walking')+'>Cena D1 andando</a><br><a target=_blank href='+d(h.c,points[2].c,'walking')+'>Warung Heaven D2 andando</a></td><td><a target=_blank href='+d(h.c,points[3].c,'walking')+'>Trail cascadas S1 andando</a><br><a target=_blank href='+d(h.c,points[6].c,'driving')+'>Tamblingan L1 coche</a></td></tr>').join('');     document.getElementById('pois').innerHTML=points.map(p=>'<tr><td><strong>'+p.id+'</strong></td><td>'+p.n+'</td><td>'+p.use+'<br><a target=_blank href='+g(p.q)+'>Abrir en Google Maps</a></td></tr>').join('');   </script> </body> </html>
+<!doctype html>
+<html lang='es'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <title>Munduk 2026 - mapa decision</title>
+  <link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'>
+  <style>
+    :root{--bg:#f6f3ed;--card:#fffaf2;--ink:#263027;--muted:#66705f;--line:#ddd3c2;--green:#2f7d58;--blue:#2f6e91;--amber:#a56a23;--red:#a33d32}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}
+    header{padding:22px 24px;background:#e8f0df;border-bottom:1px solid var(--line)}
+    h1{margin:0 0 6px;font-size:30px;letter-spacing:0}h2{margin:0 0 10px;font-size:18px}h3{margin:0 0 6px;font-size:15px}p{margin:0;color:var(--muted);line-height:1.4}
+    .layout{display:grid;grid-template-columns:360px 1fr;min-height:calc(100vh - 92px)}
+    aside{padding:16px;background:var(--card);border-right:1px solid var(--line);overflow:auto}
+    main{display:grid;grid-template-rows:minmax(500px,56vh) auto;min-width:0}
+    #map{min-height:500px}
+    .content{padding:16px;display:grid;gap:16px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px}
+    .stay{border:1px solid var(--line);border-radius:8px;background:#fff;padding:10px;margin:10px 0}
+    .stay strong{display:block;margin-bottom:4px}
+    .pill{display:inline-block;padding:3px 7px;border-radius:999px;background:#edf4e7;color:#2f6f48;font-size:12px;font-weight:700;margin:6px 4px 4px 0}
+    .pill.warn{background:#fff1d8;color:#8a5417}.pill.bad{background:#fde4df;color:#95362c}.pill.info{background:#e7f1f5;color:#2d627f}
+    .decision{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+    .mini{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px}
+    .mini ul{margin:7px 0 0;padding-left:18px;color:var(--muted);line-height:1.35}
+    table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#eee6d7;font-size:12px;text-transform:uppercase}
+    .matrix{overflow:auto}.matrix table{min-width:980px}.time{white-space:nowrap}.time small{display:block;color:var(--muted);font-size:11px}
+    a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+    .note{background:#fff7e8;border:1px solid #ead1a5;border-radius:8px;padding:10px;color:#68502d}
+    .popup a{display:inline-block;margin:6px 6px 0 0}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}main{grid-template-rows:58vh auto}aside{border-right:0;border-bottom:1px solid var(--line)}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Munduk 17-20 julio - mapa de decision</h1>
+    <p>Comparativa rapida: hoteles, puntos principales, tiempos aproximados andando/moto-driver y pros/contras.</p>
+  </header>
+  <div class='layout'>
+    <aside>
+      <section class='card'>
+        <h2>Lectura rapida</h2>
+        <p><strong>Made Oka</strong> gana si priorizais pueblo, cena y cascadas a pie. <strong>Bali Rahayu</strong> gana si quereis mas descanso/vistas y aceptais taxis cortos. <strong>Puri</strong> seria el upgrade practico si encaja la reserva.</p>
+      </section>
+      <div id='hotelCards'></div>
+    </aside>
+    <main>
+      <div id='map'></div>
+      <div class='content'>
+        <section class='card'>
+          <h2>Puntos que importan</h2>
+          <table>
+            <thead><tr><th>Pin</th><th>Punto</th><th>Por que importa</th></tr></thead>
+            <tbody id='poiSummary'></tbody>
+          </table>
+        </section>
+
+        <section class='card matrix'>
+          <h2>Matriz de tiempos aprox.</h2>
+          <p style='margin-bottom:10px'>Arriba: andando. Abajo: moto/driver. En lagos y cascadas lejanas no tiene sentido ir andando desde el hotel.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Hotel</th>
+                <th>Village</th>
+                <th>Cena D1/D2</th>
+                <th>Loop cascadas S1</th>
+                <th>Tamblingan L1</th>
+                <th>Banyumala P3</th>
+              </tr>
+            </thead>
+            <tbody id='timeMatrix'></tbody>
+          </table>
+        </section>
+
+        <section class='card'>
+          <h2>Pros y contras</h2>
+          <div class='decision' id='prosCons'></div>
+        </section>
+
+        <section class='card'>
+          <div class='note'>Usad esta matriz para comparar, no como cronometro exacto. En Munduk hay mucho desnivel, carreteras estrechas y lluvia frecuente. Para cerrar decision: comprobad el tiempo vivo en Google Maps desde la celda que os interese.</div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+  <script>
+    const hotels=[
+      {
+        id:'made-oka',n:'Made Oka Homestay and Warung',p:'82 EUR / 3 noches',kind:'Mejor base logistica',fit:'9/10',c:[-8.2656174,115.0580915],color:'#2f7d58',
+        pros:['pueblo y cena faciles','mejor equilibrio precio/logistica','buen punto para cascadas a pie'],
+        cons:['menos especial que Bali Rahayu/Moondock','confort mas sencillo','confirmar late check-in'],
+        times:{v:['5-10 min','2-4 min'],d:['5-12 min','2-4 min'],s:['15-25 min','4-7 min'],l:['no','20-30 min'],b:['no','35-45 min']}
+      },
+      {
+        id:'puri',n:'Puri Lumbung Cottages',p:'A reservar',kind:'Upgrade practico',fit:'8.5/10',c:[-8.264695,115.060220],color:'#7a8f3b',
+        pros:['muy buena salida a pie','restaurante/spa mas redondo','zona bonita para llegar cansados'],
+        cons:['ojo no cancelacion','precio puede subir','menos barato que Made Oka/Aditya'],
+        times:{v:['8-15 min','3-5 min'],d:['8-12 min','3-5 min'],s:['5-15 min','2-5 min'],l:['no','20-30 min'],b:['no','35-45 min']}
+      },
+      {
+        id:'bali-rahayu',n:'Bali Rahayu Homestay',p:'Reserva activa',kind:'Comfort-value',fit:'8/10',c:[-8.264154,115.041178],color:'#548c91',
+        pros:['vistas, piscina y descanso','restaurante en alojamiento','staff/taxis ayudan mucho'],
+        cons:['peor para pueblo a pie','camino con pendiente/de noche flojo','necesitareis taxi corto'],
+        times:{v:['20-35 min','6-10 min'],d:['25-40 min','7-12 min'],s:['35-55 min','10-15 min'],l:['no','25-35 min'],b:['no','35-50 min']}
+      },
+      {
+        id:'aditya',n:'Aditya Homestay',p:'52 EUR / 3 noches',kind:'Ahorro',fit:'8/10',c:[-8.267294,115.054804],color:'#4d8d68',
+        pros:['muy barato','bastante centrado','vale para cascadas a pie'],
+        cons:['menos redondo que Made Oka','menos experiencia/vistas','servicios mas basicos'],
+        times:{v:['10-18 min','3-6 min'],d:['5-12 min','2-4 min'],s:['20-30 min','5-8 min'],l:['no','25-35 min'],b:['no','35-50 min']}
+      },
+      {
+        id:'moondock',n:'Moondock Luxury Camp',p:'257 EUR / 3 noches',kind:'Glamping/vistas',fit:'7/10',c:[-8.272995,115.062903],color:'#a56a23',
+        pros:['experiencia mas especial','cena en alojamiento','buen plan si quereis quedaros alli'],
+        cons:['confirmar acceso equipaje','menos comodo para pueblo','no gana en logistica pura'],
+        times:{v:['25-40 min','8-12 min'],d:['20-35 min','7-10 min'],s:['15-25 min','4-7 min'],l:['no','20-35 min'],b:['no','35-50 min']}
+      },
+      {
+        id:'kayukopi',n:'Kayukopi',p:'213 EUR / 3 noches',kind:'Mas aislado',fit:'5.5/10',c:[-8.243695,115.071853],color:'#a33d32',
+        pros:['cerca zona lagos','vistas/ambiente tranquilo','puede ir bien con driver para todo'],
+        cons:['peor sin moto','lejos de pueblo/cena','no encaja con base practica'],
+        times:{v:['60+ min','12-18 min'],d:['60+ min','12-18 min'],s:['45-60 min','10-15 min'],l:['no','10-20 min'],b:['no','25-40 min']}
+      }
+    ];
+    const points=[
+      {id:'V',n:'Munduk Village',c:[-8.26427,115.05949],q:'Munduk Village Buleleng Bali',why:'Referencia de pueblo, tiendas, warungs y vida practica.'},
+      {id:'D1',n:'Jl Pura Puseh dinner cluster',c:[-8.26635,115.05675],q:'Warung Classic Munduk Jl Pura Puseh',why:'Zona util para cena/atardecer si dormis cerca del pueblo.'},
+      {id:'D2',n:'Warung Heaven',c:[-8.26690,115.05575],q:'Warung Heaven Munduk Jl Pura Puseh',why:'Otro punto simple de cena cerca del eje de hoteles.'},
+      {id:'S1',n:'Waterfall loop start',c:[-8.2614236,115.0658846],q:'Parking waterfall track Munduk',why:'Inicio practico del loop local: Melanting, Red Coral y Golden Valley.'},
+      {id:'L1',n:'Lake Tamblingan west access',c:[-8.264081,115.091111],q:'Pura Ulun Danu Tamblingan Munduk',why:'Acceso a lago/templo/canoa; mejor con driver.'},
+      {id:'L2',n:'Twin Lake View / Wanagiri',c:[-8.24880,115.10600],q:'Twin Lake View Wanagiri Bali',why:'Mirador clasico de Buyan y Tamblingan.'},
+      {id:'P3',n:'Banyumala parking/start',c:[-8.217556,115.103806],q:'Banyumala Twin Waterfalls parking',why:'Cascada potente, pero se hace con driver, no a pie desde hotel.'},
+      {id:'P4',n:'Banyu Wana Amertha entrance',c:[-8.212829,115.122227],q:'Banyu Wana Amertha Waterfall entrance',why:'Alternativa de cascadas fotogenicas si sobra energia.'}
+    ];
+    const key={v:points[0],d:points[1],s:points[3],l:points[4],b:points[6]};
+    const map=L.map('map').setView([-8.2602,115.068],14);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'OpenStreetMap'}).addTo(map);
+    const search=s=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(s);
+    const dir=(a,b,m)=>'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(a.join(','))+'&destination='+encodeURIComponent(b.join(','))+'&travelmode='+m;
+    const ico=(color,label)=>L.divIcon({className:'',html:'<div style=background:'+color+';color:white;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:800;border:2px solid white;box-shadow:0 2px 8px #0005>'+label+'</div>',iconSize:[28,28],iconAnchor:[14,14]});
+    hotels.forEach((h,i)=>L.marker(h.c,{icon:ico(h.color,String(i+1))}).addTo(map).bindPopup('<div class=popup><strong>'+h.n+'</strong><br>'+h.kind+' - '+h.fit+'<br>'+h.pros[0]+'<br><a target=_blank href='+search(h.n)+'>Google Maps</a><a target=_blank href='+dir(h.c,key.v.c,'walking')+'>Village</a><a target=_blank href='+dir(h.c,key.s.c,'walking')+'>Cascadas</a></div>'));
+    points.forEach(p=>L.marker(p.c,{icon:ico('#2f6e91',p.id)}).addTo(map).bindPopup('<strong>'+p.n+'</strong><br>'+p.why+'<br><a target=_blank href='+search(p.q)+'>Abrir en Google Maps</a>'));
+    L.polyline([[-8.264695,115.060220],[-8.2614236,115.0658846],[-8.2604,115.0672],[-8.2579,115.0695],[-8.255667,115.074306]],{color:'#2f6e91',weight:4,dashArray:'8 8'}).addTo(map);
+    map.fitBounds(L.latLngBounds([...hotels.map(h=>h.c),...points.map(p=>p.c)]).pad(.15));
+    function timeCell(h,k,mode){const target=key[k];const travel=mode==='walk'?'walking':'driving';const label=mode==='walk'?h.times[k][0]:h.times[k][1];if(label==='no')return '<span class=time>no practico<small>mejor driver</small></span>';return '<a class=time target=_blank href='+dir(h.c,target.c,travel)+'>'+label+'<small>'+(mode==='walk'?'andando':'moto/driver')+'</small></a>'}
+    function combined(h,k){return timeCell(h,k,'walk')+'<br>'+timeCell(h,k,'moto')}
+    document.getElementById('hotelCards').innerHTML=hotels.map((h,i)=>'<div class=stay><strong>'+(i+1)+'. '+h.n+'</strong><span class=pill>'+h.kind+'</span><span class=pill '+(h.fit.startsWith('5')?'bad':h.fit.startsWith('7')?'warn':'info')+'>'+h.fit+'</span><p>'+h.pros[0]+'; '+h.cons[0]+'.</p></div>').join('');
+    document.getElementById('poiSummary').innerHTML=points.map(p=>'<tr><td><strong>'+p.id+'</strong></td><td><a target=_blank href='+search(p.q)+'>'+p.n+'</a></td><td>'+p.why+'</td></tr>').join('');
+    document.getElementById('timeMatrix').innerHTML=hotels.map(h=>'<tr><td><strong>'+h.n+'</strong><br><span style=color:var(--muted)>'+h.kind+'</span></td><td>'+combined(h,'v')+'</td><td>'+combined(h,'d')+'</td><td>'+combined(h,'s')+'</td><td>'+combined(h,'l')+'</td><td>'+combined(h,'b')+'</td></tr>').join('');
+    document.getElementById('prosCons').innerHTML=hotels.map(h=>'<div class=mini><h3>'+h.n+'</h3><span class=pill>'+h.fit+'</span><p><strong>Pros</strong></p><ul>'+h.pros.map(x=>'<li>'+x+'</li>').join('')+'</ul><p style=margin-top:8px><strong>Contras</strong></p><ul>'+h.cons.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>').join('');
+  </script>
+</body>
+</html>
