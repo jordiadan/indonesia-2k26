@@ -1,25 +1,23 @@
-# Munduk Decision Map
+# Indonesia 2k26
 
-Mapa estático para comparar alojamientos en Munduk para la ruta de Indonesia 2026.
+Repo estático para publicar mapas y pequeñas herramientas del viaje con GitHub Pages.
 
-Incluye:
+## Estructura
 
-- Reservas de alojamiento con enlaces a Google Maps.
-- Puntos prácticos: Munduk Village, zonas de cena, accesos a cascadas, lagos y miradores.
-- Tabla de decisión centrada en logística sin moto, llegada larga desde Labuan Bajo y excursiones del 18-19 de julio.
+- `index.html`: portada pública con enlaces.
+- `maps/munduk.html`: mapa de decisión de Munduk.
+- `.github/workflows/pages.yml`: despliegue gratis con GitHub Actions + GitHub Pages.
 
-## Abrir
+## Añadir más HTMLs
 
-Abre `index.html` en el navegador.
+1. Añade un nuevo archivo dentro de `maps/`, por ejemplo `maps/gili-air.html`.
+2. Añade una tarjeta en `index.html` apuntando a ese archivo.
+3. Haz push a `main`. GitHub Actions desplegará la web.
 
-## Desarrollo local
+## URL esperada
 
-No necesita build ni dependencias locales. Usa Leaflet desde CDN.
+Cuando Pages esté activo, la web debería quedar en:
 
-Si quieres levantar un servidor local:
+`https://jordiadan.github.io/indonesia-2k26/`
 
-```bash
-python3 -m http.server 8080
-```
-
-Luego abre `http://localhost:8080`.
+Para que Marta lo vea sin login y sin coste, el sitio debe ser público. La forma más simple es que el repo sea público o que tu plan de GitHub permita Pages desde repos privados.
