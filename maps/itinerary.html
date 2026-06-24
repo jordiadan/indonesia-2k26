@@ -84,7 +84,7 @@
           <div class="metric"><strong>21</strong><span>dias de viaje</span></div>
           <div class="metric"><strong>9</strong><span>bases/noches</span></div>
           <div class="metric"><strong>3</strong><span>vuelos internos o internacionales clave</span></div>
-          <div class="metric"><strong>2</strong><span>decisiones de hotel abiertas</span></div>
+          <div class="metric"><strong>1</strong><span>decision de hotel abierta</span></div>
         </div>
         <div class="legend">
           <span class="pill"><span class="dot" style="background:var(--green)"></span>Base/hotel</span>
@@ -118,7 +118,7 @@
         <section class="card">
           <h2>Alertas practicas</h2>
           <div class="warn">
-            Pendiente cerrar: fast boat del 5 jul, transfer Gili Air -> Bangsal -> Tetebatu, Munduk definitivo y hotel final cerca de DPS. El mapa marca esas piezas como pendientes para que no parezcan cerradas.
+            Pendiente cerrar: transfer Gili Air -> Bangsal -> Tetebatu y hotel final cerca de DPS. Munduk ya esta cerrado con Made Oka Homestay and Warung. El fast boat del 5 jul ya esta reservado: BlueWater Express X, Padang Bai -> Gili Air, 08:00-10:05.
           </div>
         </section>
       </div>
@@ -131,7 +131,7 @@
       {id:"DPS", name:"DPS / Ngurah Rai Airport", type:"transport", coords:[-8.7482,115.1673], note:"Llegada 1 jul 23:30 y salida 21 jul 18:45.", query:"Ngurah Rai International Airport Bali"},
       {id:"TUB", name:"Tuban / Kuta llegada", type:"base", coords:[-8.7419,115.1702], hotel:"Asta House", status:"Confirmado", dates:"1-2 jul", note:"Noche 100% logistica: check-in tarde, A/C, ducha y dormir.", query:"Asta House Kuta Bali"},
       {id:"SID", name:"Sidemen", type:"base", coords:[-8.4665,115.4411], hotel:"Griya Valud", status:"Confirmado", dates:"2-5 jul", note:"Base rural bonita y operativa para arrozales, descanso y Padang Bai.", query:"Griya Valud Sidemen Bali"},
-      {id:"PAD", name:"Padang Bai Harbour", type:"transport", coords:[-8.5307,115.5083], note:"Puerto fast boat a Gili Air. Check-in 60-90 min antes.", query:"Padang Bai Harbour Bali"},
+      {id:"PAD", name:"Padang Bai Harbour", type:"transport", coords:[-8.5307,115.5083], note:"Puerto fast boat a Gili Air. BlueWater Express X reservado 5 jul 08:00-10:05.", query:"Padang Bai Harbour Bali"},
       {id:"GIL", name:"Gili Air", type:"base", coords:[-8.3575,116.0827], hotel:"Ananda B&B - Adults Only", status:"Confirmado", dates:"5-8 jul", note:"3 noches de isla: snorkel, bici, playa y cenas.", query:"Ananda B&B Gili Air"},
       {id:"BAN", name:"Bangsal Harbour", type:"transport", coords:[-8.3935,116.0998], note:"Entrada a Lombok desde Gili Air.", query:"Bangsal Harbour Lombok"},
       {id:"TET", name:"Tetebatu", type:"base", coords:[-8.5340,116.3970], hotel:"Hide and Seek", status:"Confirmado", dates:"8-10 jul", note:"Arrozales, cascadas y guia local. Confirmar transfer desde Bangsal.", query:"Hide and Seek Tetebatu Lombok"},
@@ -139,7 +139,7 @@
       {id:"LOP", name:"Lombok Airport / LOP", type:"transport", coords:[-8.7573,116.2767], note:"IW1951 sale 13 jul 11:05 hacia Labuan Bajo.", query:"Lombok International Airport"},
       {id:"LBJ", name:"Labuan Bajo", type:"base", coords:[-8.4967,119.8877], hotel:"Blue Parrot + Ocha Bajo", status:"Confirmado", dates:"13-14 y 16-17 jul", note:"Pre y post Komodo. Ocha requiere taxi temprano 17 jul.", query:"Blue Parrot Labuan Bajo"},
       {id:"KOM", name:"Komodo Open Trip", type:"experience", coords:[-8.6500,119.5850], hotel:"Ahsana Boat", status:"Confirmado", dates:"14-16 jul", note:"Deluxe Cabin with Balcony. Pick-up 09:00-10:00, fin 12:00-13:00.", query:"Padar Island Komodo National Park"},
-      {id:"MUN", name:"Munduk", type:"pending", coords:[-8.2648,115.0588], hotel:"Elegir 1: Made Oka / Moondock / Kayukopi / Bali Rahayu / Menir", status:"Pendiente", dates:"17-20 jul", note:"3 noches de montana. Prioridad: llegada flexible, cena facil, driver y cascadas/lagos.", query:"Munduk Bali"},
+      {id:"MUN", name:"Munduk", type:"base", coords:[-8.2656174,115.0580915], hotel:"Made Oka Homestay and Warung", status:"Confirmado", dates:"17-20 jul", note:"3 noches de montana en base practica para pueblo, cena, cascadas y driver local.", query:"Made Oka Homestay and Warung Munduk Bali"},
       {id:"FIN", name:"Kuta / Tuban final", type:"pending", coords:[-8.7420,115.1715], hotel:"Elegir 1: Praba / Asta House / Manggar", status:"Pendiente", dates:"20-21 jul", note:"Ultima noche: aeropuerto, guardaequipaje, ducha y transfer fiable.", query:"Praba Guesthouse Kuta Bali"}
     ];
 
@@ -148,7 +148,7 @@
       {d:"2", date:"jue 2 jul", base:"Sidemen", focus:"SID", plan:"Traslado tras desayunar. Check-in, piscina, vistas y tarde tranquila.", move:"Tuban/Kuta -> Sidemen 2-2,5 h. Salida 10:00-11:00 aprox."},
       {d:"3", date:"vie 3 jul", base:"Sidemen", focus:"SID", plan:"Arrozales, paseo guiado opcional, piscina y cena tranquila.", move:"Movimientos locales cortos con guia/driver."},
       {d:"4", date:"sab 4 jul", base:"Sidemen", focus:"SID", plan:"Naturaleza suave: Gembleng Waterfall opcional, masaje o descanso.", move:"Sin traslado largo."},
-      {d:"5", date:"dom 5 jul", base:"Gili Air", focus:"GIL", plan:"Salida hacia Gili Air. Llegada, alojamiento y sunset tranquilo.", move:"Sidemen -> Padang Bai 45-75 min + fast boat. Barco pendiente."},
+      {d:"5", date:"dom 5 jul", base:"Gili Air", focus:"GIL", plan:"Salida temprana hacia Gili Air. Llegada sobre media manana, dejar mochilas en Ananda B&B y sunset tranquilo.", move:"Salida Griya 06:00 + breakfast box + check-in puerto con margen + BlueWater Express X 08:00-10:05."},
       {d:"6", date:"lun 6 jul", base:"Gili Air", focus:"GIL", plan:"Snorkel con tortugas, bici y playa.", move:"A pie/bici."},
       {d:"7", date:"mar 7 jul", base:"Gili Air", focus:"GIL", plan:"Dia libre de playa, snorkel, descanso y cena frente al mar.", move:"A pie/bici."},
       {d:"8", date:"mie 8 jul", base:"Tetebatu", focus:"TET", plan:"Cambio a Lombok interior. Llegada a Tetebatu y tarde tranquila.", move:"Gili Air -> Bangsal + coche 2-2,5 h. Transfer pendiente."},
@@ -160,16 +160,16 @@
       {d:"14", date:"mar 14 jul", base:"Ahsana Boat", focus:"KOM", plan:"Inicio Open Trip Sailing Komodo 3D2N.", move:"Pick-up Ahsana 09:00-10:00 aprox. + embarque."},
       {d:"15", date:"mie 15 jul", base:"Ahsana Boat", focus:"KOM", plan:"Liveaboard: Padar, Pink Beach, snorkel y Komodo segun operador.", move:"Navegacion todo el dia."},
       {d:"16", date:"jue 16 jul", base:"Labuan Bajo", focus:"LBJ", plan:"Fin del barco sobre 12:00-13:00. Ducha, descanso y cena facil.", move:"Puerto/drop-off -> hotel. Ocha para dormir."},
-      {d:"17", date:"vie 17 jul", base:"Munduk", focus:"MUN", plan:"Vuelo temprano a Bali y traslado largo a Munduk. Sin plan exigente.", move:"Ocha 06:30-07:00 + QZ645 08:40-09:50 LBJ -> DPS + coche 2,5-3,5 h."},
-      {d:"18", date:"sab 18 jul", base:"Munduk", focus:"MUN", plan:"Cascadas, lagos, cafe o miradores segun clima.", move:"Driver local 15-60 min."},
-      {d:"19", date:"dom 19 jul", base:"Munduk", focus:"MUN", plan:"Segundo dia de montana/fresco: naturaleza y descanso.", move:"Movimientos locales con driver."},
+      {d:"17", date:"vie 17 jul", base:"Munduk", focus:"MUN", plan:"Vuelo temprano a Bali, traslado largo a Munduk y llegada a Made Oka sin plan exigente.", move:"Ocha 06:30-07:00 + QZ645 08:40-09:50 LBJ -> DPS + coche 2,5-3,5 h."},
+      {d:"18", date:"sab 18 jul", base:"Munduk", focus:"MUN", plan:"Cascadas, lagos, cafe o miradores segun clima desde Made Oka.", move:"Driver local 15-60 min."},
+      {d:"19", date:"dom 19 jul", base:"Munduk", focus:"MUN", plan:"Segundo dia de montana/fresco: naturaleza y descanso. Ultima noche en Made Oka.", move:"Movimientos locales con driver."},
       {d:"20", date:"lun 20 jul", base:"Kuta / Tuban final", focus:"FIN", plan:"Bajada al sur de Bali. Ultima noche cerca del aeropuerto.", move:"Munduk -> Kuta/Tuban 3-4 h. Hotel final pendiente."},
       {d:"21", date:"mar 21 jul", base:"Vuelo", focus:"DPS", plan:"Ultimas horas en Bali y vuelo internacional de vuelta.", move:"Hotel final -> DPS 15-30 min. Llegar 15:30-16:00. EY477 sale 18:45."}
     ];
 
     const transports = [
       ["30 jun / 1 jul","BCN -> AUH -> DPS","EY114 22:30-07:05+1; EY478 09:55-23:30","Internacional confirmado. Llegada tarde: dormir cerca de DPS."],
-      ["5 jul","Sidemen -> Padang Bai -> Gili Air","Coche 45-75 min + fast boat pendiente","Comparar/confirmar barco. Check-in puerto 60-90 min antes."],
+      ["5 jul","Sidemen -> Padang Bai -> Gili Air","Salida Griya 06:00; breakfast box 06:00; BlueWater Express X 08:00-10:05","Reservado via Gilibookings.com. Griya Valud confirma driver y breakfast box a las 06:00. Reconfirmar check-in del operador 24-48 h antes."],
       ["8 jul","Gili Air -> Bangsal -> Tetebatu","Barca manana + coche 2-2,5 h","Confirmar conductor y margen por retrasos."],
       ["13 jul","Kuta Lombok -> LOP -> LBJ","Salida hotel 08:00 aprox.; IW1951 11:05-12:20","Vuelo interno confirmado."],
       ["14 jul","Labuan Bajo -> Ahsana Boat","Pick-up 09:00-10:00 aprox.","Confirmar punto exacto desde Blue Parrot."],
