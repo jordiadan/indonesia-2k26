@@ -3,94 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Indonesia 2k26 - itinerary overview</title>
+  <title>Indonesia 2k26 - ruta y hoteles</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
-    :root{
-      --bg:#f6f3ed;
-      --paper:#fffaf2;
-      --card:#ffffff;
-      --line:#ddd3c2;
-      --green:#2f7d58;
-      --blue:#2f6e91;
-      --orange:#a56a23;
-      --red:#a33d32;
-      --text:#263027;
-      --muted:#66705f;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
-    header{padding:22px 24px;background:#e8f0df;border-bottom:1px solid var(--line)}
-    h1{margin:0 0 6px;font-size:30px}
-    h2{margin:0 0 10px;font-size:20px}
-    h3{margin:0 0 6px;font-size:16px}
-    p{margin:0;color:var(--muted);line-height:1.45}
-    a{color:var(--blue);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .layout{display:grid;grid-template-columns:380px 1fr;min-height:calc(100vh - 86px)}
-    aside{padding:16px;background:var(--paper);border-right:1px solid var(--line);overflow:auto}
-    main{display:grid;grid-template-rows:62vh auto}
-    #map{min-height:520px}
-    .content{padding:16px;display:grid;gap:16px}
-    .card{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px}
-    .quick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
-    .metric{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px}
-    .metric strong{display:block;font-size:20px;color:var(--green)}
-    .legend{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
-    .pill{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;background:#edf4e7;color:#2f6f48;font-size:12px;font-weight:700}
-    .dot{width:10px;height:10px;border-radius:999px;display:inline-block}
-    .day{display:block;width:100%;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:10px;margin:8px 0;text-align:left;color:inherit;cursor:pointer}
-    .day:hover,.day.active{border-color:var(--green);box-shadow:0 0 0 2px rgba(47,125,88,.12)}
-    .day .date{display:inline-block;margin-bottom:5px;color:var(--green);font-size:12px;font-weight:800}
-    .day .base{font-weight:800}
-    .day .move{margin-top:5px;font-size:13px;color:var(--muted)}
-    table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);border-radius:8px;overflow:hidden}
-    th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-    th{background:#eee6d7;color:#394334}
-    tr:last-child td{border-bottom:0}
-    .status{display:inline-block;padding:3px 7px;border-radius:999px;font-size:12px;font-weight:800;background:#edf4e7;color:#2f6f48}
-    .pending{background:#fff3d8;color:#77510e}
-    .warn{background:#fff7e8;border:1px solid #ead1a5;border-radius:8px;padding:10px;color:#68502d}
-    .popup{min-width:230px}
-    .popup strong{font-size:15px}
-    .popup .meta{display:block;margin:5px 0;color:#66705f}
-    .popup a{display:inline-block;margin:6px 8px 0 0}
-    @media(max-width:940px){
-      .layout{grid-template-columns:1fr}
-      main{grid-template-rows:62vh auto}
-      aside{border-right:0;border-bottom:1px solid var(--line);max-height:none}
-      .quick{grid-template-columns:repeat(4,minmax(0,1fr))}
-    }
-    @media(max-width:640px){
-      header{padding:18px 16px}
-      h1{font-size:25px}
-      aside,.content{padding:12px}
-      .quick{grid-template-columns:repeat(2,minmax(0,1fr))}
-      table{font-size:12px}
-    }
+    :root{--bg:#f6f3ed;--paper:#fffaf2;--card:#fff;--line:#ddd3c2;--green:#2f7d58;--blue:#2f6e91;--amber:#a56a23;--red:#a33d32;--text:#263027;--muted:#66705f}
+    *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
+    header{padding:22px 24px;background:#e8f0df;border-bottom:1px solid var(--line)}h1{margin:0 0 6px;font-size:30px}h2{margin:0 0 10px;font-size:20px}p{margin:0;color:var(--muted);line-height:1.45}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+    .layout{display:grid;grid-template-columns:370px 1fr;min-height:calc(100vh - 86px)}aside{padding:16px;background:var(--paper);border-right:1px solid var(--line);overflow:auto}main{display:grid;grid-template-rows:60vh auto}#map{min-height:500px}.content{padding:16px;display:grid;gap:16px}.card{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.metric{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px}.metric strong{display:block;font-size:20px;color:var(--green)}
+    .day{display:block;width:100%;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:10px;margin:8px 0;text-align:left;color:inherit;cursor:pointer}.day:hover,.day.active{border-color:var(--green);box-shadow:0 0 0 2px rgba(47,125,88,.12)}.date{display:inline-block;margin-bottom:5px;color:var(--green);font-size:12px;font-weight:800}.base{font-weight:800}.move{margin-top:5px;font-size:13px;color:var(--muted)}
+    table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);border-radius:8px;overflow:hidden}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#eee6d7;color:#394334}tr:last-child td{border-bottom:0}.status{display:inline-block;padding:3px 7px;border-radius:999px;font-size:12px;font-weight:800;background:#edf4e7;color:#2f6f48}.pending{background:#fff3d8;color:#77510e}.warn{background:#fff7e8;border:1px solid #ead1a5;border-radius:8px;padding:10px;color:#68502d}.popup{min-width:220px}.popup .meta{display:block;margin:5px 0;color:#66705f}
+    @media(max-width:940px){.layout{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--line)}}@media(max-width:640px){header{padding:18px 16px}h1{font-size:25px}aside,.content{padding:12px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}table{font-size:12px}}
   </style>
 </head>
 <body>
   <header>
-    <h1>Indonesia 2k26 - mapa general del viaje</h1>
-    <p>Overview operativo de la Ruta A: bases, alojamientos, transportes, horarios clave y decisiones pendientes.</p>
+    <h1>Indonesia 2k26 - ruta y hoteles</h1>
+    <p>Plan limpio de la Ruta A: hoteles finales, transportes clave y pendientes reales.</p>
   </header>
   <div class="layout">
     <aside>
       <section class="card">
-        <h2>Ruta A en una mirada</h2>
-        <p>30 jun-21 jul. Bali, Gili Air, Lombok, Komodo y vuelta a Bali. Usa los botones de cada dia para centrar el mapa y ver la logistica clave.</p>
-        <div class="quick">
-          <div class="metric"><strong>21</strong><span>dias de viaje</span></div>
-          <div class="metric"><strong>9</strong><span>bases/noches</span></div>
-          <div class="metric"><strong>3</strong><span>vuelos internos o internacionales clave</span></div>
-          <div class="metric"><strong>1</strong><span>decision de hotel abierta</span></div>
-        </div>
-        <div class="legend">
-          <span class="pill"><span class="dot" style="background:var(--green)"></span>Base/hotel</span>
-          <span class="pill"><span class="dot" style="background:var(--blue)"></span>Transporte</span>
-          <span class="pill"><span class="dot" style="background:var(--orange)"></span>Experiencia</span>
-          <span class="pill"><span class="dot" style="background:var(--red)"></span>Pendiente</span>
+        <h2>Resumen</h2>
+        <p>30 jun-21 jul. Bali, Gili Air, Lombok, Komodo y Munduk.</p>
+        <div class="grid">
+          <div class="metric"><strong>21</strong><span>dias</span></div>
+          <div class="metric"><strong>9</strong><span>bases</span></div>
+          <div class="metric"><strong>1</strong><span>hotel por elegir</span></div>
+          <div class="metric"><strong>2</strong><span>reservas vivas final</span></div>
         </div>
       </section>
       <section class="card" style="margin-top:14px">
@@ -102,159 +41,53 @@
       <div id="map"></div>
       <div class="content">
         <section class="card">
-          <h2>Alojamientos y decisiones</h2>
-          <table>
-            <thead><tr><th>Tramo</th><th>Base / reserva</th><th>Estado util</th><th>Link</th></tr></thead>
-            <tbody id="hotels"></tbody>
-          </table>
+          <h2>Hoteles</h2>
+          <table><thead><tr><th>Fechas</th><th>Zona</th><th>Hotel</th><th>Estado</th></tr></thead><tbody id="hotels"></tbody></table>
         </section>
         <section class="card">
           <h2>Transportes clave</h2>
-          <table>
-            <thead><tr><th>Fecha</th><th>Ruta</th><th>Horario / margen</th><th>Notas</th></tr></thead>
-            <tbody id="transports"></tbody>
-          </table>
+          <table><thead><tr><th>Fecha</th><th>Ruta</th><th>Horario</th><th>Nota</th></tr></thead><tbody id="transports"></tbody></table>
         </section>
         <section class="card">
-          <h2>Alertas practicas</h2>
-          <div class="warn">
-            Pendiente cerrar: transfer Gili Air -> Bangsal -> Tetebatu y hotel final cerca de DPS. Munduk ya esta cerrado con Made Oka Homestay and Warung. El fast boat del 5 jul ya esta reservado: BlueWater Express X, Padang Bai -> Gili Air, 08:00-10:05.
-          </div>
+          <h2>Pendientes reales</h2>
+          <div class="warn">Elegir hotel final 20-21 jul entre Praba Guesthouse y Asta House; organizar Gili Air -> Bangsal -> Tetebatu; organizar DPS -> Munduk y Munduk -> Kuta/Tuban; confirmar detalles operativos de Ocha/Ahsana.</div>
         </section>
       </div>
     </main>
   </div>
-
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    const bases = [
-      {id:"DPS", name:"DPS / Ngurah Rai Airport", type:"transport", coords:[-8.7482,115.1673], note:"Llegada 1 jul 23:30 y salida 21 jul 18:45.", query:"Ngurah Rai International Airport Bali"},
-      {id:"TUB", name:"Tuban / Kuta llegada", type:"base", coords:[-8.7419,115.1702], hotel:"Asta House", status:"Confirmado", dates:"1-2 jul", note:"Noche 100% logistica: check-in tarde, A/C, ducha y dormir.", query:"Asta House Kuta Bali"},
-      {id:"SID", name:"Sidemen", type:"base", coords:[-8.4665,115.4411], hotel:"Griya Valud", status:"Confirmado", dates:"2-5 jul", note:"Base rural bonita y operativa para arrozales, descanso y Padang Bai.", query:"Griya Valud Sidemen Bali"},
-      {id:"PAD", name:"Padang Bai Harbour", type:"transport", coords:[-8.5307,115.5083], note:"Puerto fast boat a Gili Air. BlueWater Express X reservado 5 jul 08:00-10:05.", query:"Padang Bai Harbour Bali"},
-      {id:"GIL", name:"Gili Air", type:"base", coords:[-8.3575,116.0827], hotel:"Ananda B&B - Adults Only", status:"Confirmado", dates:"5-8 jul", note:"3 noches de isla: snorkel, bici, playa y cenas.", query:"Ananda B&B Gili Air"},
-      {id:"BAN", name:"Bangsal Harbour", type:"transport", coords:[-8.3935,116.0998], note:"Entrada a Lombok desde Gili Air.", query:"Bangsal Harbour Lombok"},
-      {id:"TET", name:"Tetebatu", type:"base", coords:[-8.5340,116.3970], hotel:"Hide and Seek", status:"Confirmado", dates:"8-10 jul", note:"Arrozales, cascadas y guia local. Confirmar transfer desde Bangsal.", query:"Hide and Seek Tetebatu Lombok"},
-      {id:"KLO", name:"Kuta Lombok", type:"base", coords:[-8.8940,116.2790], hotel:"Sasak Experience", status:"Confirmado", dates:"10-13 jul", note:"Base para playas, restaurantes y salida agil a LOP.", query:"Sasak Experience Kuta Lombok"},
-      {id:"LOP", name:"Lombok Airport / LOP", type:"transport", coords:[-8.7573,116.2767], note:"IW1951 sale 13 jul 11:05 hacia Labuan Bajo.", query:"Lombok International Airport"},
-      {id:"LBJ", name:"Labuan Bajo", type:"base", coords:[-8.4967,119.8877], hotel:"Blue Parrot + Ocha Bajo", status:"Confirmado", dates:"13-14 y 16-17 jul", note:"Pre y post Komodo. Ocha requiere taxi temprano 17 jul.", query:"Blue Parrot Labuan Bajo"},
-      {id:"KOM", name:"Komodo Open Trip", type:"experience", coords:[-8.6500,119.5850], hotel:"Ahsana Boat", status:"Confirmado", dates:"14-16 jul", note:"Deluxe Cabin with Balcony. Pick-up 09:00-10:00, fin 12:00-13:00.", query:"Padar Island Komodo National Park"},
-      {id:"MUN", name:"Munduk", type:"base", coords:[-8.2656174,115.0580915], hotel:"Made Oka Homestay and Warung", status:"Confirmado", dates:"17-20 jul", note:"3 noches de montana en base practica para pueblo, cena, cascadas y driver local.", query:"Made Oka Homestay and Warung Munduk Bali"},
-      {id:"FIN", name:"Kuta / Tuban final", type:"pending", coords:[-8.7420,115.1715], hotel:"Elegir 1: Praba / Asta House / Manggar", status:"Pendiente", dates:"20-21 jul", note:"Ultima noche: aeropuerto, guardaequipaje, ducha y transfer fiable.", query:"Praba Guesthouse Kuta Bali"}
+    const stops=[
+      {id:'DPS',name:'DPS Airport',type:'transport',coords:[-8.7482,115.1673],query:'Ngurah Rai International Airport Bali'},
+      {id:'TUB',name:'Tuban / Kuta llegada',type:'base',coords:[-8.7419,115.1702],hotel:'Asta House',dates:'1-2 jul',status:'Confirmado',query:'Asta House Kuta Bali'},
+      {id:'SID',name:'Sidemen',type:'base',coords:[-8.4665,115.4411],hotel:'Griya Valud',dates:'2-5 jul',status:'Confirmado',query:'Griya Valud Sidemen Bali'},
+      {id:'PAD',name:'Padang Bai Harbour',type:'transport',coords:[-8.5307,115.5083],query:'Padang Bai Harbour Bali'},
+      {id:'GIL',name:'Gili Air',type:'base',coords:[-8.3575,116.0827],hotel:'Ananda B&B - Adults Only',dates:'5-8 jul',status:'Confirmado',query:'Ananda B&B Gili Air'},
+      {id:'BAN',name:'Bangsal Harbour',type:'transport',coords:[-8.3935,116.0998],query:'Bangsal Harbour Lombok'},
+      {id:'TET',name:'Tetebatu',type:'base',coords:[-8.5340,116.3970],hotel:'Hide and Seek',dates:'8-10 jul',status:'Confirmado',query:'Hide and Seek Tetebatu Lombok'},
+      {id:'KLO',name:'Kuta Lombok',type:'base',coords:[-8.8940,116.2790],hotel:'Sasak Experience',dates:'10-13 jul',status:'Confirmado',query:'Sasak Experience Kuta Lombok'},
+      {id:'LOP',name:'Lombok Airport',type:'transport',coords:[-8.7573,116.2767],query:'Lombok International Airport'},
+      {id:'LBJ',name:'Labuan Bajo',type:'base',coords:[-8.4967,119.8877],hotel:'Blue Parrot + Ocha Bajo Homestay',dates:'13-14 y 16-17 jul',status:'Confirmado',query:'Blue Parrot Labuan Bajo'},
+      {id:'KOM',name:'Komodo Open Trip',type:'experience',coords:[-8.6500,119.5850],hotel:'Ahsana Boat',dates:'14-16 jul',status:'Confirmado',query:'Padar Island Komodo National Park'},
+      {id:'MUN',name:'Munduk',type:'base',coords:[-8.2656174,115.0580915],hotel:'Made Oka Homestay and Warung',dates:'17-20 jul',status:'Confirmado',query:'Made Oka Homestay and Warung Munduk Bali'},
+      {id:'FIN',name:'Kuta / Tuban final',type:'pending',coords:[-8.7420,115.1715],hotel:'Praba Guesthouse o Asta House',dates:'20-21 jul',status:'Elegir 1',query:'Praba Guesthouse Kuta Bali'}
     ];
-
-    const days = [
-      {d:"1", date:"mie 1 jul", base:"Tuban / Kuta", focus:"TUB", plan:"Llegada a Bali sobre 23:30. Dormir cerca del aeropuerto.", move:"EY478 AUH -> DPS 09:55-23:30 + taxi/Grab/hotel 5-15 min."},
-      {d:"2", date:"jue 2 jul", base:"Sidemen", focus:"SID", plan:"Traslado tras desayunar. Check-in, piscina, vistas y tarde tranquila.", move:"Tuban/Kuta -> Sidemen 2-2,5 h. Salida 10:00-11:00 aprox."},
-      {d:"3", date:"vie 3 jul", base:"Sidemen", focus:"SID", plan:"Arrozales, paseo guiado opcional, piscina y cena tranquila.", move:"Movimientos locales cortos con guia/driver."},
-      {d:"4", date:"sab 4 jul", base:"Sidemen", focus:"SID", plan:"Naturaleza suave: Gembleng Waterfall opcional, masaje o descanso.", move:"Sin traslado largo."},
-      {d:"5", date:"dom 5 jul", base:"Gili Air", focus:"GIL", plan:"Salida temprana hacia Gili Air. Llegada sobre media manana, dejar mochilas en Ananda B&B y sunset tranquilo.", move:"Salida Griya 06:00 + breakfast box + check-in puerto con margen + BlueWater Express X 08:00-10:05."},
-      {d:"6", date:"lun 6 jul", base:"Gili Air", focus:"GIL", plan:"Snorkel con tortugas, bici y playa.", move:"A pie/bici."},
-      {d:"7", date:"mar 7 jul", base:"Gili Air", focus:"GIL", plan:"Dia libre de playa, snorkel, descanso y cena frente al mar.", move:"A pie/bici."},
-      {d:"8", date:"mie 8 jul", base:"Tetebatu", focus:"TET", plan:"Cambio a Lombok interior. Llegada a Tetebatu y tarde tranquila.", move:"Gili Air -> Bangsal + coche 2-2,5 h. Transfer pendiente."},
-      {d:"9", date:"jue 9 jul", base:"Tetebatu", focus:"TET", plan:"Arrozales, cascadas y experiencia rural con guia local.", move:"A pie/driver corto."},
-      {d:"10", date:"vie 10 jul", base:"Kuta Lombok", focus:"KLO", plan:"Traslado al sur. Check-in y tarde de playa o cafes.", move:"Tetebatu -> Kuta Lombok 2-2,5 h."},
-      {d:"11", date:"sab 11 jul", base:"Kuta Lombok", focus:"KLO", plan:"Tanjung Aan y sunset en Bukit Merese.", move:"Playas del sur 15-30 min por tramo."},
-      {d:"12", date:"dom 12 jul", base:"Kuta Lombok", focus:"KLO", plan:"Selong Belanak, Mawun o surf suave segun ganas.", move:"Playas 20-45 min. Preparar equipaje."},
-      {d:"13", date:"lun 13 jul", base:"Labuan Bajo", focus:"LBJ", plan:"Vuelo a Labuan Bajo. Hotel y tarde tranquila antes del barco.", move:"Kuta -> LOP 30-45 min + IW1951 11:05-12:20 LOP -> LBJ."},
-      {d:"14", date:"mar 14 jul", base:"Ahsana Boat", focus:"KOM", plan:"Inicio Open Trip Sailing Komodo 3D2N.", move:"Pick-up Ahsana 09:00-10:00 aprox. + embarque."},
-      {d:"15", date:"mie 15 jul", base:"Ahsana Boat", focus:"KOM", plan:"Liveaboard: Padar, Pink Beach, snorkel y Komodo segun operador.", move:"Navegacion todo el dia."},
-      {d:"16", date:"jue 16 jul", base:"Labuan Bajo", focus:"LBJ", plan:"Fin del barco sobre 12:00-13:00. Ducha, descanso y cena facil.", move:"Puerto/drop-off -> hotel. Ocha para dormir."},
-      {d:"17", date:"vie 17 jul", base:"Munduk", focus:"MUN", plan:"Vuelo temprano a Bali, traslado largo a Munduk y llegada a Made Oka sin plan exigente.", move:"Ocha 06:30-07:00 + QZ645 08:40-09:50 LBJ -> DPS + coche 2,5-3,5 h."},
-      {d:"18", date:"sab 18 jul", base:"Munduk", focus:"MUN", plan:"Cascadas, lagos, cafe o miradores segun clima desde Made Oka.", move:"Driver local 15-60 min."},
-      {d:"19", date:"dom 19 jul", base:"Munduk", focus:"MUN", plan:"Segundo dia de montana/fresco: naturaleza y descanso. Ultima noche en Made Oka.", move:"Movimientos locales con driver."},
-      {d:"20", date:"lun 20 jul", base:"Kuta / Tuban final", focus:"FIN", plan:"Bajada al sur de Bali. Ultima noche cerca del aeropuerto.", move:"Munduk -> Kuta/Tuban 3-4 h. Hotel final pendiente."},
-      {d:"21", date:"mar 21 jul", base:"Vuelo", focus:"DPS", plan:"Ultimas horas en Bali y vuelo internacional de vuelta.", move:"Hotel final -> DPS 15-30 min. Llegar 15:30-16:00. EY477 sale 18:45."}
+    const hotels=[
+      ['1-2 jul','Kuta','Asta House','Confirmado'],['2-5 jul','Sidemen','Griya Valud','Confirmado'],['5-8 jul','Gili Air','Ananda B&B - Adults Only','Confirmado'],['8-10 jul','Tetebatu','Hide and Seek','Confirmado'],['10-13 jul','Kuta Lombok','Sasak Experience','Confirmado'],['13-14 jul','Labuan Bajo','Blue Parrot','Confirmado externo'],['14-16 jul','Komodo','Ahsana Boat','Confirmado'],['16-17 jul','Labuan Bajo','Ocha Bajo Homestay','Confirmado'],['17-20 jul','Munduk','Made Oka Homestay and Warung','Confirmado'],['20-21 jul','Kuta/Tuban','Praba Guesthouse o Asta House','Elegir 1']
     ];
-
-    const transports = [
-      ["30 jun / 1 jul","BCN -> AUH -> DPS","EY114 22:30-07:05+1; EY478 09:55-23:30","Internacional confirmado. Llegada tarde: dormir cerca de DPS."],
-      ["5 jul","Sidemen -> Padang Bai -> Gili Air","Salida Griya 06:00; breakfast box 06:00; BlueWater Express X 08:00-10:05","Reservado via Gilibookings.com. Griya Valud confirma driver y breakfast box a las 06:00. Reconfirmar check-in del operador 24-48 h antes."],
-      ["8 jul","Gili Air -> Bangsal -> Tetebatu","Barca manana + coche 2-2,5 h","Confirmar conductor y margen por retrasos."],
-      ["13 jul","Kuta Lombok -> LOP -> LBJ","Salida hotel 08:00 aprox.; IW1951 11:05-12:20","Vuelo interno confirmado."],
-      ["14 jul","Labuan Bajo -> Ahsana Boat","Pick-up 09:00-10:00 aprox.","Confirmar punto exacto desde Blue Parrot."],
-      ["16 jul","Ahsana Boat -> Labuan Bajo","Fin 12:00-13:00 aprox.","Confirmar drop-off final."],
-      ["17 jul","LBJ -> DPS -> Munduk","QZ645 08:40-09:50 + coche 2,5-3,5 h","Dia largo. Driver esperando tras aterrizar."],
-      ["20 jul","Munduk -> Kuta/Tuban","Coche 3-4 h","Salir por la manana para llegar con margen."],
-      ["21 jul","Hotel final -> DPS -> AUH","DPS 18:45; estar 15:30-16:00","Transfer final corto y fiable."]
+    const days=[
+      ['1','mie 1 jul','Tuban / Kuta','Llegada tarde a Bali. Dormir cerca del aeropuerto.','EY478 llega 23:30 + taxi/Grab/pickup.','TUB'],['2-4','2-4 jul','Sidemen','Arrozales, descanso, naturaleza y salida temprana a Padang Bai.','Tuban -> Sidemen; 5 jul salida 06:00.','SID'],['5-7','5-7 jul','Gili Air','Snorkel, bici, playa y cenas.','BlueWater Express X 08:00-10:05.','GIL'],['8-9','8-9 jul','Tetebatu','Arrozales, cascadas y guia local.','Gili Air -> Bangsal -> Tetebatu.','TET'],['10-12','10-12 jul','Kuta Lombok','Playas del sur y salida agil a LOP.','Tetebatu -> Kuta; 13 jul LOP.','KLO'],['13','lun 13 jul','Labuan Bajo','Llegada y noche pre-Komodo.','IW1951 LOP -> LBJ 11:05-12:20.','LBJ'],['14-16','14-16 jul','Ahsana Boat','Open Trip Komodo 3D2N.','Pick-up 09:00-10:00; fin 12:00-13:00.','KOM'],['16','jue 16 jul','Labuan Bajo','Ducha, descanso y dormir cerca para vuelo temprano.','Ocha -> LBJ temprano al dia siguiente.','LBJ'],['17-19','17-19 jul','Munduk','Cascadas, lagos, cafe y fresco de montana.','QZ645 LBJ -> DPS 08:40-09:50 + coche a Munduk.','MUN'],['20','lun 20 jul','Kuta / Tuban final','Bajada al sur y ultima noche cerca de DPS.','Munduk -> Kuta/Tuban 3-4 h.','FIN'],['21','mar 21 jul','Vuelo','Ultimas horas y vuelta.','DPS 18:45; llegar 15:30-16:00.','DPS']
     ];
-
-    const route = ["DPS","TUB","SID","PAD","GIL","BAN","TET","KLO","LOP","LBJ","KOM","LBJ","DPS","MUN","FIN","DPS"];
-    const routeCoords = route.map(id => bases.find(b => b.id === id).coords);
-    const colorByType = {base:"#2f7d58", transport:"#2f6e91", experience:"#a56a23", pending:"#a33d32"};
-    const map = L.map("map").setView([-8.48,116.6],7);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom:19, attribution:"OpenStreetMap"}).addTo(map);
-    L.polyline(routeCoords, {color:"#2f6e91", weight:4, opacity:.75}).addTo(map);
-    L.polyline([bases.find(b=>b.id==="LBJ").coords,bases.find(b=>b.id==="KOM").coords], {color:"#a56a23", weight:4, opacity:.8, dashArray:"8 8"}).addTo(map);
-
-    const google = query => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(query);
-    const directions = (a,b,mode="driving") => "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(a.join(",")) + "&destination=" + encodeURIComponent(b.join(",")) + "&travelmode=" + mode;
-    const icon = (color,label) => L.divIcon({
-      className:"",
-      html:"<div style='background:"+color+";color:#fff;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;border:2px solid #fff;box-shadow:0 2px 8px #0005;font-size:11px'>"+label+"</div>",
-      iconSize:[30,30],
-      iconAnchor:[15,15]
-    });
-
-    const markers = {};
-    bases.forEach(base => {
-      const marker = L.marker(base.coords, {icon:icon(colorByType[base.type], base.id)}).addTo(map);
-      marker.bindPopup(
-        "<div class='popup'><strong>"+base.name+"</strong>" +
-        (base.hotel ? "<span class='meta'>"+base.hotel+" · "+base.dates+" · "+base.status+"</span>" : "<span class='meta'>"+base.note+"</span>") +
-        "<p>"+base.note+"</p>" +
-        "<a target='_blank' href='"+google(base.query)+"'>Abrir en Google Maps</a></div>"
-      );
-      markers[base.id] = marker;
-    });
-    map.fitBounds(L.latLngBounds(routeCoords).pad(.16));
-
-    function setActiveDay(index){
-      document.querySelectorAll(".day").forEach((el,i)=>el.classList.toggle("active", i===index));
-      const item = days[index];
-      const base = bases.find(b => b.id === item.focus);
-      map.setView(base.coords, item.focus === "KOM" ? 9 : 11);
-      markers[item.focus].openPopup();
-    }
-
-    document.getElementById("days").innerHTML = days.map((day,index) =>
-      "<button class='day' data-index='"+index+"'>" +
-      "<span class='date'>Dia "+day.d+" · "+day.date+"</span>" +
-      "<div class='base'>"+day.base+"</div>" +
-      "<p>"+day.plan+"</p>" +
-      "<div class='move'>"+day.move+"</div>" +
-      "</button>"
-    ).join("");
-    document.querySelectorAll(".day").forEach(button => {
-      button.addEventListener("click", () => setActiveDay(Number(button.dataset.index)));
-    });
-
-    document.getElementById("hotels").innerHTML = bases
-      .filter(base => base.hotel)
-      .map(base => {
-        const statusClass = base.status === "Pendiente" ? "status pending" : "status";
-        return "<tr><td>"+base.dates+"</td><td><strong>"+base.name+"</strong><br>"+base.hotel+"</td><td><span class='"+statusClass+"'>"+base.status+"</span><br>"+base.note+"</td><td><a target='_blank' href='"+google(base.query)+"'>Maps</a></td></tr>";
-      }).join("");
-
-    document.getElementById("transports").innerHTML = transports.map(t =>
-      "<tr><td>"+t[0]+"</td><td><strong>"+t[1]+"</strong></td><td>"+t[2]+"</td><td>"+t[3]+"</td></tr>"
-    ).join("");
-
-    const sidemen = bases.find(b=>b.id==="SID").coords;
-    const padang = bases.find(b=>b.id==="PAD").coords;
-    const munduk = bases.find(b=>b.id==="MUN").coords;
-    const finalHotel = bases.find(b=>b.id==="FIN").coords;
-    const quickLinks = L.control({position:"bottomleft"});
-    quickLinks.onAdd = function(){
-      const div = L.DomUtil.create("div", "card");
-      div.style.maxWidth = "280px";
-      div.innerHTML = "<strong>Enlaces rapidos</strong><br>" +
-        "<a target='_blank' href='"+directions(sidemen,padang)+"'>Sidemen -> Padang Bai</a><br>" +
-        "<a target='_blank' href='"+directions(munduk,finalHotel)+"'>Munduk -> hotel final</a><br>" +
-        "<a target='_blank' href='"+google("Indonesia 2k26 Bali Lombok Komodo route") +"'>Busqueda general</a>";
-      return div;
-    };
-    quickLinks.addTo(map);
+    const transports=[['5 jul','Sidemen -> Padang Bai -> Gili Air','06:00 + BlueWater 08:00-10:05','Reservado. Reconfirmar check-in 24-48 h antes.'],['8 jul','Gili Air -> Bangsal -> Tetebatu','Manana + coche 2-2,5 h','Pendiente organizar.'],['13 jul','Kuta Lombok -> LOP -> LBJ','IW1951 11:05-12:20','Vuelo confirmado.'],['17 jul','LBJ -> DPS -> Munduk','QZ645 08:40-09:50 + coche','Pendiente driver DPS -> Munduk.'],['20 jul','Munduk -> Kuta/Tuban','Coche 3-4 h','Pendiente organizar.'],['21 jul','Hotel final -> DPS','Llegar 15:30-16:00','Depende del hotel final.']];
+    const colors={base:'#2f7d58',transport:'#2f6e91',experience:'#a56a23',pending:'#a33d32'};
+    const map=L.map('map').setView([-8.48,116.6],7);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'OpenStreetMap'}).addTo(map);
+    const google=q=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);const icon=(c,l)=>L.divIcon({className:'',html:"<div style='background:"+c+";color:#fff;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;border:2px solid #fff;box-shadow:0 2px 8px #0005;font-size:11px'>"+l+"</div>",iconSize:[30,30],iconAnchor:[15,15]});
+    const markers={};stops.forEach(s=>{const m=L.marker(s.coords,{icon:icon(colors[s.type],s.id)}).addTo(map);m.bindPopup("<div class='popup'><strong>"+s.name+"</strong>"+(s.hotel?"<span class='meta'>"+s.hotel+" · "+s.dates+" · "+s.status+"</span>":"")+"<a target='_blank' href='"+google(s.query)+"'>Google Maps</a></div>");markers[s.id]=m});
+    const route=['DPS','TUB','SID','PAD','GIL','BAN','TET','KLO','LOP','LBJ','KOM','LBJ','DPS','MUN','FIN','DPS'].map(id=>stops.find(s=>s.id===id).coords);L.polyline(route,{color:'#2f6e91',weight:4,opacity:.75}).addTo(map);map.fitBounds(L.latLngBounds(route).pad(.16));
+    document.getElementById('hotels').innerHTML=hotels.map(h=>'<tr><td>'+h[0]+'</td><td>'+h[1]+'</td><td><strong>'+h[2]+'</strong></td><td><span class="status '+(h[3].startsWith('Elegir')?'pending':'')+'">'+h[3]+'</span></td></tr>').join('');
+    document.getElementById('transports').innerHTML=transports.map(t=>'<tr><td>'+t[0]+'</td><td><strong>'+t[1]+'</strong></td><td>'+t[2]+'</td><td>'+t[3]+'</td></tr>').join('');
+    document.getElementById('days').innerHTML=days.map((d,i)=>'<button class="day" data-i="'+i+'"><span class="date">Dia '+d[0]+' · '+d[1]+'</span><div class="base">'+d[2]+'</div><p>'+d[3]+'</p><div class="move">'+d[4]+'</div></button>').join('');
+    document.querySelectorAll('.day').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.day').forEach(x=>x.classList.remove('active'));b.classList.add('active');const s=stops.find(x=>x.id===days[Number(b.dataset.i)][5]);map.setView(s.coords,s.id==='KOM'?9:11);markers[s.id].openPopup()}));
   </script>
 </body>
 </html>
